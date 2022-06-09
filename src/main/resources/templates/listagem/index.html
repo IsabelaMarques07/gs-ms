@@ -1,0 +1,45 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="pt-br">
+
+<header th:replace="~{cabecalho :: head('Listar viagens')}"></header>
+
+<body>
+	<nav th:replace="~{menu :: nav}"></nav>	
+	<div class="container mt-3">
+		
+		<h3>Seus veículos</h3>
+		<table id="tbProduto" class="table table-bordered table-sm">
+			<thead>
+				<tr>
+					<th>Data de decolagem</th>
+					<th>Duração de dias da estadia</th>
+					<th>Quantidade de assento</th>
+					<th>Nome do modelo</th>
+					<th>Nome do 1o comandante</th>
+					<th>Matrícula 1o comandante</th>
+					<th>Nome 2o comandante</th>
+					<th>Matrícula 2o comandante</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="viagem : ${listarViagens}">
+					<td th:text="${viagem.getDataDecolagem()}">data</td>
+					<td th:text="${viagem.getDuracaoEstadia()}">duracao</td>
+					<td th:text="${viagem.getQtdAssentos()}">qtd</td>
+					<td th:text="${viagem.getModeloNave()}">modelo</td>
+					<td th:text="${viagem.getPrimeiroComandante()}">nome1</td>
+					<td th:text="${viagem.getMatriculaPrimeiroComandante()}">matricula1</td>
+					<td th:text="${viagem.getSegundoComandante()}">nome2</td>
+					<td th:text="${viagem.getMatriculaSegundoComandante()}">matricula2</td>
+					<td>
+						<a href="">
+							Mais detalhes</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<a type="button" class="btn btn-warning" href="viagens/cadastro">Cadastrar nova viagem</a>
+	</div>
+</body>
+
+</html>

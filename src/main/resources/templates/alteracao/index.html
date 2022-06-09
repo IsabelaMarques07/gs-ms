@@ -1,0 +1,113 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" lang="pt-br">
+
+<header th:replace="~{cabecalho :: head('Cadastrar viagem')}"></header>
+<body>
+<nav th:replace="~{menu :: nav}"></nav>
+	<div class="container mt-3">
+	<h3>Editar viagem</h3>
+		<form th:object="${viagemDTO}" action="/viagens" method="POST">
+		
+		
+			<div class="row">
+				<div class="col-md-6">
+					<div class="input-group mb-3 input-group-sm">
+						<span class="input-group-text">Data da decolagem</span> <input
+							th:errorclass="is-invalid" type="date" th:field="*{dataDecolagem}"
+							class="form-control">
+						<div class="invalid-feedback" th:errors="*{dataDecolagem}"></div>
+					</div>
+
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-md-6">
+					<div class="input-group mb-3 input-group-sm">
+						<span class="input-group-text">Duração da Estadia</span> <input
+							th:errorclass="is-invalid" type="text" th:field="*{duracaoEstadia}"
+							class="form-control">
+						<div class="invalid-feedback" th:errors="*{duracaoEstadia}"></div>
+					</div>
+
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-md-6">
+					<div class="input-group mb-3 input-group-sm">
+						<span class="input-group-text">Quantidade de assentos</span> <input
+							th:errorclass="is-invalid" type="text" th:field="*{qtdAssentos}"
+							class="form-control">
+						<div class="invalid-feedback" th:errors="*{qtdAssentos}"></div>
+					</div>
+
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-md-6">
+					<div class="input-group mb-3 input-group-sm">
+						<span class="input-group-text">Modelo da Nave</span> <input
+							th:errorclass="is-invalid" type="text" th:field="*{modeloNave}"
+							class="form-control">
+						<div class="invalid-feedback" th:errors="*{modeloNave}"></div>
+					</div>
+
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-md-6">
+					<div class="input-group mb-3 input-group-sm">
+						<span class="input-group-text">Nome do primeiro comandante</span> <input
+							th:errorclass="is-invalid" type="text" th:field="*{primeiroComandante}"
+							class="form-control">
+						<div class="invalid-feedback" th:errors="*{primeiroComandante}"></div>
+					</div>
+
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-md-6">
+					<div class="input-group mb-3 input-group-sm">
+						<span class="input-group-text">Matrícula do primeiro comandante</span> <input
+							th:errorclass="is-invalid" type="text" th:field="*{matriculaPrimeiroComandante}"
+							class="form-control">
+						<div class="invalid-feedback" th:errors="*{matriculaPrimeiroComandante}"></div>
+					</div>
+
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-md-6">
+					<div class="input-group mb-3 input-group-sm">
+						<span class="input-group-text">Nome do segundo comandante</span> <input
+							th:errorclass="is-invalid" type="text" th:field="*{segundoComandante}"
+							class="form-control">
+						<div class="invalid-feedback" th:errors="*{segundoComandante}"></div>
+					</div>
+
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-md-6">
+					<div class="input-group mb-3 input-group-sm">
+						<span class="input-group-text">Matrícula do segundo comandante</span> <input
+							th:errorclass="is-invalid" type="text" th:field="*{matriculaSegundoComandante}"
+							class="form-control">
+						<div class="invalid-feedback" th:errors="*{matriculaSegundoComandante}"></div>
+					</div>
+
+				</div>
+			</div>
+			
+			<input class="btn btn-success" type="submit" value="Salvar" />
+		</form>
+	</div>
+</body>
+</html>
