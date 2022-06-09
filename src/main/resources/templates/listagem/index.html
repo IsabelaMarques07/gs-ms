@@ -8,7 +8,7 @@
 	<div class="container mt-3">
 		
 		<h3>Seus veículos</h3>
-		<table id="tbProduto" class="table table-bordered table-sm">
+		<table id="tbViagem" class="table table-bordered table-sm">
 			<thead>
 				<tr>
 					<th>Data de decolagem</th>
@@ -32,8 +32,10 @@
 					<td th:text="${viagem.getSegundoComandante()}">nome2</td>
 					<td th:text="${viagem.getMatriculaSegundoComandante()}">matricula2</td>
 					<td>
-						<a href="">
-							Mais detalhes</a>
+						<a th:href="@{/viagens/{idViagem}/edit(idViagem = ${viagem.idViagem})}" class="btn btn-warning">
+							Editar</a>
+						<a th:href="@{/viagens/{idViagem}/delete (idViagem = ${viagem.idViagem})}"
+						class="btn btn-danger"> Deletar</a>
 					</td>
 				</tr>
 			</tbody>

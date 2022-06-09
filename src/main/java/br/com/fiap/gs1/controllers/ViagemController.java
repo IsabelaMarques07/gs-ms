@@ -3,6 +3,7 @@ package br.com.fiap.gs1.controllers;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -14,6 +15,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 import br.com.fiap.gs1.repositories.ViagemRepository;
@@ -66,6 +68,53 @@ public class ViagemController {
 		viagemRepository.save(viagemEntity);
 		
 		return new ModelAndView ("redirect:/viagens");
+	}
+	
+	@GetMapping("viagens/{id}/edit")
+	public ModelAndView edit(@PathVariable int id, ViagemDTO request) {
+		Optional<Viagem> optionalViagem = viagemRepository.findById(id);
+
+		if (optionalViagem.isPresent()) {
+			Viagem viagem = optionalViagem.get();
+			request.fromViagem(viagem);
+			ModelAndView model = new ModelAndView("alteracao/index");
+			model.addObject("idViagem", viagem.getIdViagem());
+			return model;
+		}
+
+		//
+		return new ModelAndView("redirect:/viagens");
+	}
+	
+	@PostMapping("/viagens/{id}")
+	public ModelAndView update(@PathVariable int id, @Valid ViagemDTO request, BindingResult bindingResult) {
+
+		if (bindingResult.hasErrors()) {
+			ModelAndView model = new ModelAndView("alteracao/index");
+			model.addObject("idViagem", id);
+			return model;
+		}
+		
+		Optional<Viagem> optionalViagem = viagemRepository.findById(id);
+		
+		if(optionalViagem.isPresent()){
+			Viagem viagem = modelMapper.map(request, Viagem.class);
+			viagem.setIdViagem(id);
+			viagemRepository.save(viagem);
+			return new ModelAndView("redirect:/viagens");
+		}
+		
+		return new ModelAndView("redirect:/produtos");
+	}
+
+	
+	@GetMapping("/viagens/{id}/delete")
+	public ModelAndView delete(@PathVariable int id) {
+		ModelAndView model = new ModelAndView("redirect:/viagens");
+		
+		this.viagemRepository.deleteById(id);
+		model.addObject("mensagem", "Viagem removida com sucesso!");
+		return model;
 	}
 	
 

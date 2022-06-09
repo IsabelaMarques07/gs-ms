@@ -7,7 +7,7 @@
 <nav th:replace="~{menu :: nav}"></nav>
 	<div class="container mt-3">
 	<h3>Editar viagem</h3>
-		<form th:object="${viagemDTO}" action="/viagens" method="POST">
+		<form th:object="${viagemDTO}" action="#" th:action="@{/viagens/{id} (id=${idViagem})}" method="POST">
 		
 		
 			<div class="row">

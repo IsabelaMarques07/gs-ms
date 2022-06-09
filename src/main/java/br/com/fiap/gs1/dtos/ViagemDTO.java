@@ -8,6 +8,8 @@ import javax.validation.constraints.NotBlank;
 
 import com.sun.istack.NotNull;
 
+import br.com.fiap.gs1.models.Viagem;
+
 public class ViagemDTO {
 		
 		@NotNull
@@ -108,5 +110,16 @@ public class ViagemDTO {
 			this.dataRetornoTerra = dataRetornoTerra;
 		}
 		
+		public void fromViagem(Viagem viagem) {
+			this.dataDecolagem = viagem.getDataDecolagem();
+			this.duracaoEstadia = viagem.getDuracaoEstadia();
+			this.qtdAssentos = viagem.getQtdAssentos();
+			this.modeloNave = viagem.getModeloNave();
+			this.primeiroComandante = viagem.getPrimeiroComandante();
+			this.matriculaPrimeiroComandante = viagem.getMatriculaPrimeiroComandante();
+			this.segundoComandante = viagem.getSegundoComandante();
+			this.matriculaSegundoComandante = viagem.getMatriculaSegundoComandante();			
+			
+		}
 		
 }
