@@ -1,6 +1,8 @@
 package br.com.fiap.gs1.controllers;
 
-import java.sql.Date;
+import java.util.Calendar;
+import java.util.Date;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Optional;
@@ -56,14 +58,23 @@ public class ViagemController {
 	
 	
 	@PostMapping("/viagens")
-	public ModelAndView salvar(@Valid ViagemDTO viagem, BindingResult bindingResult ) {
+	public ModelAndView salvar(@Valid ViagemDTO viagem, BindingResult bindingResult ) throws ParseException {
 		if(bindingResult.hasErrors()) {
 			System.out.println("Temos erros!");
 			return new ModelAndView("cadastro/index");
 		}
 		
 		Viagem viagemEntity = modelMapper.map(viagem, Viagem.class);
-		
+
+		//calcular data de retorno
+		SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd"); 
+		Date dataDecolagem = formato.parse(viagemEntity.getDataDecolagem()); 
+		Date dataRetorno = formato.parse(viagemEntity.getDataDecolagem());       
+		dataRetorno.setDate(dataRetorno.getDate()+viagemEntity.getDuracaoEstadia());
+		SimpleDateFormat formatoData = new SimpleDateFormat("dd/MM/yyyy"); 
+		viagemEntity.setDataRetornoTerra(formatoData.format(dataRetorno));
+		viagemEntity.setDataDecolagem(formatoData.format(dataDecolagem));
+		System.out.println("DATA: "+ viagemEntity.getDataRetornoTerra());
 		//a repository faz a interação com o banco de dados
 		viagemRepository.save(viagemEntity);
 		
@@ -87,7 +98,7 @@ public class ViagemController {
 	}
 	
 	@PostMapping("/viagens/{id}")
-	public ModelAndView update(@PathVariable int id, @Valid ViagemDTO request, BindingResult bindingResult) {
+	public ModelAndView update(@PathVariable int id, @Valid ViagemDTO request, BindingResult bindingResult) throws ParseException {
 
 		if (bindingResult.hasErrors()) {
 			ModelAndView model = new ModelAndView("alteracao/index");
@@ -100,6 +111,7 @@ public class ViagemController {
 		if(optionalViagem.isPresent()){
 			Viagem viagem = modelMapper.map(request, Viagem.class);
 			viagem.setIdViagem(id);
+			
 			viagemRepository.save(viagem);
 			return new ModelAndView("redirect:/viagens");
 		}

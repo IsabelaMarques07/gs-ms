@@ -40,8 +40,8 @@ public class Viagem {
 	@Column(nullable = false)
 	private String matriculaSegundoComandante;
 	
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
-	private Date dataRetornoTerra;
+	
+	private String dataRetornoTerra;
 
 	
 	public Viagem() {
@@ -49,7 +49,7 @@ public class Viagem {
 	
 	public Viagem(int idViagem, String dataDecolagem, int duracaoEstadia, int qtdAssentos, String modeloNave,
 			String primeiroComandante, String matriculaPrimeiroComandante, String segundoComandante,
-			String matriculaSegundoComandante, Date dataRetornoTerra) {
+			String matriculaSegundoComandante, String dataRetornoTerra) {
 		super();
 		this.idViagem = idViagem;
 		this.dataDecolagem = dataDecolagem;
@@ -135,11 +135,11 @@ public class Viagem {
 		this.matriculaSegundoComandante = matriculaSegundoComandante;
 	}
 
-	public Date getDataRetornoTerra() {
+	public String getDataRetornoTerra() {
 		return dataRetornoTerra;
 	}
 
-	public void setDataRetornoTerra(Date dataRetornoTerra) {
+	public void setDataRetornoTerra(String dataRetornoTerra) {
 		this.dataRetornoTerra = dataRetornoTerra;
 	}
 	

@@ -19,6 +19,7 @@
 					<th>Matrícula 1o comandante</th>
 					<th>Nome 2o comandante</th>
 					<th>Matrícula 2o comandante</th>
+					<th>Data de retorno</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -31,6 +32,7 @@
 					<td th:text="${viagem.getMatriculaPrimeiroComandante()}">matricula1</td>
 					<td th:text="${viagem.getSegundoComandante()}">nome2</td>
 					<td th:text="${viagem.getMatriculaSegundoComandante()}">matricula2</td>
+					<td th:text="${viagem.getDataRetornoTerra()}">retorno</td>
 					<td>
 						<a th:href="@{/viagens/{idViagem}/edit(idViagem = ${viagem.idViagem})}" class="btn btn-warning">
 							Editar</a>
