@@ -111,7 +111,15 @@ public class ViagemController {
 		if(optionalViagem.isPresent()){
 			Viagem viagem = modelMapper.map(request, Viagem.class);
 			viagem.setIdViagem(id);
-			
+			//calcular data de retorno
+			SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd"); 
+			Date dataDecolagem = formato.parse(viagem.getDataDecolagem()); 
+			Date dataRetorno = formato.parse(viagem.getDataDecolagem());       
+			dataRetorno.setDate(dataRetorno.getDate()+viagem.getDuracaoEstadia());
+			SimpleDateFormat formatoData = new SimpleDateFormat("dd/MM/yyyy"); 
+			viagem.setDataRetornoTerra(formatoData.format(dataRetorno));
+			viagem.setDataDecolagem(formatoData.format(dataDecolagem));
+			System.out.println("DATA: "+ viagem.getDataRetornoTerra());
 			viagemRepository.save(viagem);
 			return new ModelAndView("redirect:/viagens");
 		}
