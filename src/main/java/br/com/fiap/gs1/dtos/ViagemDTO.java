@@ -34,8 +34,7 @@ public class ViagemDTO {
 		@NotBlank
 		private String matriculaSegundoComandante;
 		@NotNull
-		@Future
-		private Date dataRetornoTerra;
+		private String dataRetornoTerra;
 
 
 		public String getDataDecolagem() {
@@ -102,11 +101,11 @@ public class ViagemDTO {
 			this.matriculaSegundoComandante = matriculaSegundoComandante;
 		}
 
-		public Date getDataRetornoTerra() {
+		public String getDataRetornoTerra() {
 			return dataRetornoTerra;
 		}
 
-		public void setDataRetornoTerra(Date dataRetornoTerra) {
+		public void setDataRetornoTerra(String dataRetornoTerra) {
 			this.dataRetornoTerra = dataRetornoTerra;
 		}
 		
